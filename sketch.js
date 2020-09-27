@@ -5,8 +5,12 @@ const Body = Matter.Body;
 
 var engine, world;
 
-var alien, spaceship, ground;
+var alien, spaceship;
 var alienImage, AlienImage, spaceshipImage, SpaceShipImage;
+
+var ground = [];
+
+
 
 function preload() {
     alienImage = loadImage("images/Alien.png",AlienImage);
@@ -16,13 +20,18 @@ function preload() {
 function setup(){
     createCanvas(displayWidth-50,displayHeight-50);
 
+    console.log(width,height);
 
     engine = Engine.create();
     world = engine.world;
 
-    alien = new Alien(width/2,height/2,40,40);
+    alien = new Alien(width/2,height/2-20,80,80);
 
-    ground = new Ground(width/2,height/2+20,210,10);
+    for(var a=75; a<=width*6; a+=150)
+    {
+        var rand = random(538,690);
+        ground.push(new Ground(a,rand,100,20));
+    }
 
     Engine.run(engine);
 }
@@ -31,10 +40,15 @@ function draw(){
     Engine.update(engine);
     background(0);
 
-    ground.visible=true;
-
     alien.display();
-    ground.display();
+
+    for(var a=0; a<=ground.length; a+=1)
+    {
+         var displayGround = ground[a];
+        displayGround.display();
+    }
+
+    
 }
 
 function  detectCollision(lstone,lmango,lattach) {
@@ -43,11 +57,11 @@ function  detectCollision(lstone,lmango,lattach) {
 
 	var distance= dist(sPos.x,sPos.y,mPos.x,mPos.y)
         if(distance<=lmango.width+lstone.width){
-            //Matter.Body.setStatic(lmango.body,false);
             lattach.detach();
         }
 }
 
-// function createGround(){
-//     for(var a = width+20, a)
-// }
+function createGround()
+{
+    
+}

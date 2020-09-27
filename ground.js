@@ -17,7 +17,5 @@ class Ground{
     fill(255,255,255);
     stroke(20);
     rect(pos.x,pos.y,this.width,this.height);
-    image(spaceshipImage,pos.x,pos.y);
-    console.log("Hi");
     }
 };
