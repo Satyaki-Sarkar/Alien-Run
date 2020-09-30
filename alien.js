@@ -3,7 +3,7 @@ class Alien{
         var options = {
             'restitution': 0.5,
             'density' : 1.0,
-            'friction' : 1.0
+            'friction' : 2.0
         }
 
         this.body = Bodies.rectangle(x,y,width,height,options);
