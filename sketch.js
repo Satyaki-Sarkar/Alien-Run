@@ -11,6 +11,7 @@ var alienImage, AlienImage, spaceshipImage, SpaceShipImage;
 var ground = [];
 
 var c, counter;
+var camera;
 
 function preload() {
     alienImage = loadImage("images/Alien.png",AlienImage);
@@ -22,6 +23,7 @@ function setup(){
 
     engine = Engine.create();
     world = engine.world;
+    camera = new Camera();
 
     c = 700;
     counter=0;
@@ -39,13 +41,12 @@ function setup(){
         }
     }
 
-    alien = new Alien(50,height-65,80,80);
+    alien = new Alien(70,height-66,80,80);
 
     Engine.run(engine);
 }
 
 function draw(){
-    Engine.update(engine);
     background(0);
 
     alien.display();
@@ -75,8 +76,8 @@ function  detectCollision(lstone,lmango,lattach) {
 function keyPressed()
 {
     if(keyCode===UP_ARROW){
-        var posX= Matter.Body.positionX;
-        var posY=Matter.Body.positionY;
-        Matter.Body.applyForce(alien.body,{posX , posY},{x : 10, y : -30});
+        var posX= alien.body.position.x;
+        var posY=alien.body.position.y;
+        Matter.Body.applyForce(alien.body,{x :posX , y : posY},{x : 17, y : -20});
     }
 }
